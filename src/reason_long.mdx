@@ -1,0 +1,25 @@
+# Reasoning
+
+- Why is it long?
+  - full development lifecycle is takes too much time.
+  - storybook is running on mocked data.
+  - logic is shared between the savant-app & savant-components repository
+  - forcing us to go full lifecycle
+
+Notes: Tips
+
+        - Explain possible motivation to the mocked data
+        - Mention the blurred boundaries between
+          smart/dumb components
+
+---
+
+## Why is it long?
+
+- Because it takes too long to test real case scenario
+  - `lerna exec -- yarn build` <font style={{color:"red"}}>(user 3m26.450s)</font>
+  - `lerna exec -- yarn unpublish` <font style={{color:"green"}}>(user 0m2.602s)</font>
+  - `lerna exec -- yarn publish` <font style={{color:"green"}}>(user 0m3.059s)</font>
+  - `yarn remove ...` <font style={{color:"yellow"}}>(user 0m27.642s)</font>
+  - `yarn add ...` <font style={{color:"orange"}}>(user 0m8.818s)</font>
+  - `yarn develop` <font style={{color:"yellow"}}>(user ~0m30s)</font>

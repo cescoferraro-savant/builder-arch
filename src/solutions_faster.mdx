@@ -1,0 +1,95 @@
+import { Code } from "./test";
+
+# How can we make it faster (to work with)?
+
+- Reduce number of Context
+- Make file structure represent html structure
+- Making components dumb again
+
+---
+
+# Targeted Anchitecture
+
+<Code file={"FlowBuilder.tsx"} language={"jsx"}>
+  {`
+<SavantApp>
+    <SavantComponents>
+        <Redux.Provider> // Temporary
+            <ReactQuery.Provider>
+                <ComputeGraphContext.Provider>
+                    // Dumb Components
+                    <GraphCore/>
+                    <Control/>
+                    <ConfigPanel/>
+                    <Inspector/>
+                    <AutomationConfig/>
+                    <LibraryPopover/>
+                    <LibraryPopover/>
+                    <LibraryPopover/>
+                    // Dumb Components
+                </ComputeGraphContext.Provider>
+            </ReactQuery.Provider>
+        </Redux.Provider>
+    </SavantComponents>
+</SavantApp>
+`}
+</Code>
+
+Notes: here are some more notes.
+
+---
+
+# File Organization
+
+<Code file={"MyComponent.tsx"} language={"jsx"}>
+  {`
+<div>
+    <MainPanel />
+    <SidePanel />
+</div>
+`}
+</Code>
+
+<br />
+
+<Code file={"MainPanel.tsx"} language={"jsx"}>
+  {`
+const MainPanel = () => {
+    const query =  useMainQuery()
+    const value = useCalculateValueMemo()
+    useDoSomethingEffect()
+    return (
+        <div>
+            <h2>{titleGenerator(query.meta}</h2>
+            <Header  total={query.data?.total || 0} />
+            <List data={query.data?.content || []}  />
+        </div>
+    )
+}
+`}
+</Code>
+
+---
+
+<Code file={"MainPanel.tsx"} language={"jsx"}>
+  {`
+MyComponent/
+├── MyComponent.tsx
+├── MainPanel
+│       ├── Header
+│       │       └── Header.tsx
+│       ├── List
+│       │       └── List.tsx
+│       ├── MainPanel.tsx
+│       ├── hooks
+│       │       ├── useCalculateValueMemo.ts
+│       │       ├── useDoSomethingEffect.ts
+│       │       └── useMainQuery.ts
+│       ├── shared
+│       │       └── titleGenerator.ts
+│       └── titleGenerator.ts
+└── SidePanel
+    └── SidePanel.tsx
+`}
+
+</Code>

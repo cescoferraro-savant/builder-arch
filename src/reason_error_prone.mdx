@@ -1,0 +1,85 @@
+import { Code } from "./test";
+import boundaries from "./images/boundaries.png";
+
+# Reasoning
+
+- Why is it error prone?
+  - components are too “smart”
+  - state is shared and synced between multiple React Contexts, Redux store and browser events
+  - useEffect pattern is used indiscriminately leading to hard to grasp behaviour's
+
+Notes: Tips
+
+- Show Current Architecture
+- Context means not in pure react sense,
+  but also include rbowser events & redux store
+
+---
+
+<Code file={"FlowBuilder.tsx"} language={"jsx"}>
+  {`
+<SavantApp>
+    <Browser.Provider>
+        <SavantComponents>
+            <BuilderContext.Provider>
+                <Builder />
+            </BuilderContext.Provider>
+        </SavantComponents>
+        <AutomationContext.Provider>
+            <AutomationConfig />
+        </AutomationContext.Provider>
+        <SourcesContext.Provider>
+            <LibraryPopover/>
+        </SourcesContext.Provider>
+        <NodeContext.Provider>
+            <LibraryPopover/>
+        </NodeContext.Provider>
+        <ConnectionsContext.Provider>
+            <LibraryPopover/>
+        </ConnectionsContext.Provider>
+    </Browser.Provider>
+</SavantApp>
+`}
+</Code>
+
+Notes: here are some more notes.
+
+---
+
+<Code file={"Builder.tsx"} language={"jsx"}>
+  {`
+<Redux.Provider>
+    <ReactQuery.Provider>
+        <ComputeGraphContext.Provider>
+            <FlowContext.Provider>
+                <GraphCore />
+                <ControlContext.Provider >
+                    <Control />
+                </ControlContext.Provider>
+            </FlowContext.Provider>
+            <ConfigurerContext.Provider>
+                <EditorContext.Provider>
+                    <ConfigPanel />
+                </EditorContext.Provider>
+            </ConfigurerContext.Provider>
+            <InspectorContext.Provider>
+                <Inspector />
+            </InspectorContext.Provider>
+        </ComputeGraphContext.Provider>
+    </ReactQuery.Provider>
+</Redux.Provider>
+`}
+</Code>
+
+---
+
+## Why is it error prone?
+
+- Boundaries are not properly defined,
+  making the code hard to read & to reason about
+
+<div
+  style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+>
+  <img src={boundaries} style={{ maxWidth: 600 }} alt="sdfk" />
+</div>
